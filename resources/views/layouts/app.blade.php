@@ -81,8 +81,18 @@
             <a href="contact.html" class="nav-item nav-link">Contact</a>
           </div>
           <div>
-          <a href="" class="btn btn-primary px-4">Login</a>
-          <a href="/register" class="btn btn-primary px-4">Sign In</a>
+          @guest
+            <a href="/login" class="btn btn-primary px-4">Login</a>
+            <a href="/register" class="btn btn-primary px-4">Sign In</a>
+          @endguest
+          @auth
+                   <form method="POST" action="{{ route('logout') }}" class="inline">                      @csrf
+                      <button type="submit" class="btn btn-primary px-4">
+                         Log Out
+                      </button>
+                    </form>
+          @endauth
+          
         </div>
         
       </nav>
