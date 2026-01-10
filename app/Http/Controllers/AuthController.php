@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Dotenv\Validator;
@@ -12,14 +13,13 @@ class AuthController extends Controller
 {
 
 
-    public function create()
+    public function showRegister()
     {
         return view ('auth.register');
     }
     public function register(StoreUserRequest $request)
     {
     
-
         $user= User::create([
             'name'=>$request->name,
             'email'=>$request->email,
@@ -29,5 +29,33 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect('/');
+    }
+
+    public function showLogin()
+    {
+        return view('auth.login');
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $user = $request->only('email','password');
+        
+        if(Auth::attempt($user)){
+            $request->session()->regenerate();
+            return redirect()->intended('/');
+        }
+        return back()->withErrors([
+            'email'=>'The provided credentials do not match our records.'
+        ])->onlyInput('email');
+
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+            return redirect('/');
+
     }
 }
