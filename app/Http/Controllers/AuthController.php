@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Dotenv\Validator;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,7 @@ class AuthController extends Controller
             'password'=>$request->password
         ]);
 
+         event(new Registered($user));
         Auth::login($user);
 
         return redirect('/');
