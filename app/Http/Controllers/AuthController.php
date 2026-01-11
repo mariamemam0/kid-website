@@ -39,8 +39,9 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $user = $request->only('email','password');
+        $remember = $request->filled('remember_token');
         
-        if(Auth::attempt($user)){
+        if(Auth::attempt($user,$remember)){
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
