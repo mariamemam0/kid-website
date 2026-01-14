@@ -13,7 +13,7 @@ class KidController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {//
+    {
         $kids = Kid::all();
         return view('kids.index',compact('kids'));
     }
