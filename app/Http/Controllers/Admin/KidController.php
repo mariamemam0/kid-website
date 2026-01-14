@@ -14,7 +14,8 @@ class KidController extends Controller
      */
     public function index()
     {
-        //
+        $kids = Kid::all();
+        return view('kids.index',compact('kids'));
     }
 
     /**
@@ -40,7 +41,7 @@ class KidController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
