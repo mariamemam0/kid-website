@@ -39,3 +39,4 @@ return back()->with('message','Verification email sent!');
 Route::get('/create',[KidController::class,'create']);
 Route::post('/store',[KidController::class,'store']);
 Route::get('kids',[KidController::class,'index']);
+Route::get('kid/{kid}',[KidController::class,'show']);

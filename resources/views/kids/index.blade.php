@@ -11,7 +11,7 @@
 
 
                     <div class="card-body">
-                        <h5 class="card-title">{{ $kid->name }}</h5>
+                        <a href="/kid/{{ $kid->id }}"><h5 class="card-title">{{ $kid->name }}</h5></a>
                         <p class="mb-1">🎂 Age: {{ $kid->age }} years</p>
                         
 

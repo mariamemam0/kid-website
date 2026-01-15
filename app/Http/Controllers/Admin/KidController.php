@@ -39,9 +39,9 @@ class KidController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Kid $kid)
     {
-        
+       return view('kids.show',compact('kid'));
     }
 
     /**
