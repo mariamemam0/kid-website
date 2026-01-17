@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKidRequest;
+use App\Http\Requests\UpdateKidRequest;
 use App\Models\Kid;
 use Illuminate\Http\Request;
 
@@ -55,9 +56,13 @@ class KidController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateKidRequest $request, Kid $kid)
     {
-        //
+        $kid->update($request->validated());
+
+        return redirect('/')->with('success', 'Kid updated successfully!');
+
+
     }
 
     /**

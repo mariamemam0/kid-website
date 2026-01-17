@@ -27,9 +27,10 @@
         </ul>
     </div>
 @endif
-                <form action="/store" method="POST" enctype="multipart/form-data">
-                    @method('PUT')
+                <form action="/kids/{{ $kid->id }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
+                    
                   <div class="form-group">
                     <input
                       type="text"
