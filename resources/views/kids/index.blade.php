@@ -16,7 +16,7 @@
                         
 
                         <div class="d-flex justify-content-center gap-2">
-                            <a href="" class="btn btn-sm btn-warning">✏️</a>
+                            <a href="/kids/{{ $kid->id }}/edit" class="btn btn-sm btn-warning">✏️</a>
 
                             <form action="" method="POST">
                                 @csrf

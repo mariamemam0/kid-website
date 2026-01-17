@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKidRequest;
+use App\Http\Requests\UpdateKidRequest;
 use App\Models\Kid;
 use Illuminate\Http\Request;
 
@@ -47,17 +48,21 @@ class KidController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Kid $kid)
     {
-        //
+        return view('kids.edit',compact('kid'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateKidRequest $request, Kid $kid)
     {
-        //
+        $kid->update($request->validated());
+
+        return redirect('/')->with('success', 'Kid updated successfully!');
+
+
     }
 
     /**
