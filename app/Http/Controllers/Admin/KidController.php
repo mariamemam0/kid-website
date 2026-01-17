@@ -47,9 +47,9 @@ class KidController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Kid $kid)
     {
-        //
+        return view('kids.edit',compact('kid'));
     }
 
     /**
