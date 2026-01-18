@@ -45,6 +45,8 @@
                     <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
                     <a href="{{ url('/classes') }}" class="nav-item nav-link">Classes</a>
                     <a href="{{ url('/teachers') }}" class="nav-item nav-link">Teachers</a>
+                     <a href="/kids" class="nav-item nav-link">Kids</a>
+
                     <a href="{{ url('/gallery') }}" class="nav-item nav-link">Gallery</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
