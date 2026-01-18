@@ -43,7 +43,7 @@
                 <div class="navbar-nav font-weight-bold mx-auto py-0">
                     <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
                     <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
-                    <a href="{{ url('/classes') }}" class="nav-item nav-link">Classes</a>
+                    <a href="/courses" class="nav-item nav-link">Courses</a>
                     <a href="{{ url('/teachers') }}" class="nav-item nav-link">Teachers</a>
                      <a href="/kids" class="nav-item nav-link">Kids</a>
 

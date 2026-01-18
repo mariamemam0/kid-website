@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\KidController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CoursesController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +38,4 @@ return back()->with('message','Verification email sent!');
 
 Route::resource('kids',KidController::class);
 
+Route::resource('courses',CoursesController::class);
