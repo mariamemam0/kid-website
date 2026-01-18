@@ -35,11 +35,5 @@ return back()->with('message','Verification email sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 //
 
+Route::resource('kids',KidController::class);
 
-Route::get('/create',[KidController::class,'create']);
-Route::post('/store',[KidController::class,'store']);
-Route::get('kids',[KidController::class,'index']);
-Route::get('kid/{kid}',[KidController::class,'show']);
-Route::get('/kids/{kid}/edit',[KidController::class,'edit']);
-Route::put('kids/{kid}',[KidController::class,'update']);
-Route::delete('/kids/{kid}',[KidController::class,'destroy']);
