@@ -18,7 +18,7 @@
                         <div class="d-flex justify-content-center gap-2">
                             <a href="/kids/{{ $kid->id }}/edit" class="btn btn-sm btn-warning">✏️</a>
 
-                            <form action="" method="POST">
+                            <form action="/kids/{{ $kid->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger">🗑</button>

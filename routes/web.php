@@ -42,3 +42,4 @@ Route::get('kids',[KidController::class,'index']);
 Route::get('kid/{kid}',[KidController::class,'show']);
 Route::get('/kids/{kid}/edit',[KidController::class,'edit']);
 Route::put('kids/{kid}',[KidController::class,'update']);
+Route::delete('/kids/{kid}',[KidController::class,'destroy']);

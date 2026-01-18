@@ -68,8 +68,11 @@ class KidController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Kid $kid)
     {
-        //
+        $kid->delete();
+         return redirect('/kids');
+
+
     }
 }
