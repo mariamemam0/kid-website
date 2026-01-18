@@ -32,7 +32,7 @@
                 elitripsum vero.
               </li>
             </ul>
-            <a href="/create" class="btn btn-primary mt-4 py-2 px-4">Book Now</a>
+            <a href="kids/create" class="btn btn-primary mt-4 py-2 px-4">Book Now</a>
           </div>
         </div>
       </div>

@@ -14,4 +14,11 @@ class Kid extends Model
          'parent_phone',
          'address',
     ];
+
+
+
+    public function courses()
+    {
+        return $this->belongsToMany(Courses::class);
+    }
 }
