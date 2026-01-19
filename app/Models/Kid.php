@@ -19,6 +19,6 @@ class Kid extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Courses::class);
+        return $this->belongsToMany(Course::class);
     }
 }
