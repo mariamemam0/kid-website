@@ -41,6 +41,7 @@ class KidController extends Controller
         $kid->courses()->attach($request->course_ids);
         return redirect('/');
     }
+    //
 
     /**
      * Display the specified resource.
