@@ -28,6 +28,8 @@ class StoreKidRequest extends FormRequest
             'parent_name' => 'required|string|max:255',
             'parent_phone' => 'required|string|max:20',
             'address' => 'nullable|string|max:255',
+            'course_ids' => 'required|array',
+            'course_ids.*' => 'exists:courses,id',
         ];
     }
 }

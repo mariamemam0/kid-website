@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKidRequest;
 use App\Http\Requests\UpdateKidRequest;
+use App\Models\Course;
 use App\Models\Kid;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class KidController extends Controller
     public function index()
     {
         $kids = Kid::all();
-        return view('kids.index',compact('kids'));
+        $courses = Course::all();
+        return view('kids.index',compact('kids','courses'));
     }
 
     /**
@@ -24,7 +26,8 @@ class KidController extends Controller
      */
     public function create()
     {
-        return view('kids.kidform');
+        $courses = Course::all();
+        return view('kids.kidform',compact('courses'));
     }
 
     /**
@@ -33,7 +36,9 @@ class KidController extends Controller
     public function store(StoreKidRequest $request)
     {
         $data = $request->validated();
-        Kid::create($data);
+         $kid = Kid::create($data);
+
+        $kid->courses()->attach($request->course_ids);
         return redirect('/');
     }
 
@@ -50,7 +55,8 @@ class KidController extends Controller
      */
     public function edit(Kid $kid)
     {
-        return view('kids.edit',compact('kid'));
+         $courses = Course::all();
+        return view('kids.edit',compact('kid','courses'));
     }
 
     /**
