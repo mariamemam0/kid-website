@@ -27,7 +27,7 @@
         </ul>
     </div>
 @endif
-                <form action="/store" method="POST" enctype="multipart/form-data">
+                <form action="/kids" method="POST" enctype="multipart/form-data">
                     @csrf
                   <div class="form-group">
                     <input
@@ -81,9 +81,24 @@
           required
         />
       </div>
-        
-    
-                  
+      <!-- Courses Selection -->
+<div class="form-group">
+    <select
+        name="course_ids[]"
+        class="custom-select border-0 px-4"
+        style="height: 47px;"
+        multiple
+        required
+    >
+        <option value="" disabled>Select Courses</option>
+        @foreach ($courses as $course)
+            <option value="{{ $course->id }}">
+                {{ $course->name }} (Age {{ $course->age_from }}–{{ $course->age_to }})
+            </option>
+        @endforeach
+    </select>
+    <small class="text-light d-block mt-1">Hold Ctrl (Cmd on Mac) to select multiple</small>
+</div>
                   <div>
                     <button
                       class="btn btn-secondary btn-block border-0 py-3"
