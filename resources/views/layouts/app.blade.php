@@ -26,6 +26,31 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+<style>
+    .chat-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #007bff; /* blue */
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+.chat-button:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+    color: white;
+}
+</style>
 </head>
 
 <body>
@@ -41,8 +66,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav font-weight-bold mx-auto py-0">
+                     
                     <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-                    <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
+                    <a href="/reactions" class="nav-item nav-link">About</a>
                     <a href="/courses" class="nav-item nav-link">Courses</a>
                     <a href="{{ url('/teachers') }}" class="nav-item nav-link">Teachers</a>
                      <a href="/kids" class="nav-item nav-link">Kids</a>
@@ -65,11 +91,15 @@
                     @endguest
 
                     @auth
+                     <a href="/chat" class="chat-button" title="Open Chat">
+                        <i class="fas fa-comments"></i>
+                    </a>
                         <form method="POST" action="{{ route('logout') }}" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-primary px-4">Log Out</button>
                         </form>
                     @endauth
+                  
                 </div>
             </div>
         </nav>
