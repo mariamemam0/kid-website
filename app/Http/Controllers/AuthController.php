@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegistered;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
@@ -26,9 +27,11 @@ class AuthController extends Controller
             'email'=>$request->email,
             'password'=>$request->password
         ]);
+         Auth::login($user);
 
-         event(new Registered($user));
-        Auth::login($user);
+         //event(new Registered($user));
+        event(new UserRegistered($user->name));
+       
 
         return redirect('/');
     }
