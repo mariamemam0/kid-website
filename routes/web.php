@@ -9,9 +9,13 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
+
+
 
 Route::get('/register',[AuthController::class,'showRegister'])->name('register.form');
 

@@ -2,7 +2,16 @@
 
 @section('content')
 
-
+      @auth
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.Echo.private('user-registered')
+                        .listen('UserRegistered', e => {
+                            toastr.success('A new user has registered: ' + e.name)
+                        })
+                });
+            </script>
+        @endauth
  <!-- Registration Start -->
     <div class="container-fluid py-5">
       <div class="container">
@@ -665,4 +674,3 @@
     <!-- Blog End -->
     
 @endsection
-
