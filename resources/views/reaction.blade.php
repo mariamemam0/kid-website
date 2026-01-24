@@ -458,41 +458,88 @@
             </div>
         </div>
     </div>
-    <script>
-function sendReaction(type, emoji, element) {
-    // Ripple effect
-    const ripple = document.createElement('div');
-    ripple.classList.add('ripple');
-    element.appendChild(ripple);
-    ripple.style.left = event.offsetX + 'px';
-    ripple.style.top = event.offsetY + 'px';
-    setTimeout(() => ripple.remove(), 600);
-
-    // Send to server
-    axios.post('/reaction', { type, emoji })
-        .catch(err => console.error(err));
-}
-
-// Listen for real-time reactions
-document.addEventListener('DOMContentLoaded', function() {
-    window.Echo.channel('global-reactions')
-        .listen('ReactionSent', (e) => {
-            console.log('Reaction received:', e.type, e.emoji);
-
-            // Floating emoji
-            const emojiEl = document.createElement('div');
-            emojiEl.className = 'floating-emoji';
-            emojiEl.textContent = e.emoji;
-            emojiEl.style.setProperty('--drift-x', (Math.random() * 200 - 100) + 'px');
-            emojiEl.style.left = (window.innerWidth / 2) + 'px';
-            emojiEl.style.top = (window.innerHeight / 2) + 'px';
-            document.body.appendChild(emojiEl);
-
-            setTimeout(() => emojiEl.remove(), 3000);
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.Echo.channel('global-reactions')
+                .listen('ReactionSent', (e) => {
+                    createFloatingEmoji(e.type)
+                });
         });
-});
-</script>
+        // Send reaction to server
+        function sendReaction(type, emoji, element) {
+            // Create ripple effect
+            createRipple(event, element);
+            
+            // Send to server (just broadcast, no database)
+            fetch('/reactions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ type: type })
+            })
+            .then(res => res.json())
+            .then(data => {
+                // console.log('Reaction sent:', data);
+            })
+            .catch(err => console.error('Failed to send reaction:', err));
+        }
 
+        // Create floating emoji animation
+        function createFloatingEmoji(type, clickEvent) {
+            const emojis = {
+                wave: '👋',
+                love: '❤️',
+                energy: '⚡',
+                joy: '😊'
+            };
+
+            const emoji = document.createElement('div');
+            emoji.className = 'floating-emoji';
+            emoji.textContent = emojis[type];
+            
+            // Position at click location or random
+            if (clickEvent) {
+                emoji.style.left = clickEvent.clientX + 'px';
+                emoji.style.top = clickEvent.clientY + 'px';
+            } else {
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.top = window.innerHeight + 'px';
+            }
+            
+            // Random drift
+            emoji.style.setProperty('--drift-x', (Math.random() - 0.5) * 200 + 'px');
+            
+            document.body.appendChild(emoji);
+
+            // Remove after animation
+            setTimeout(() => {
+                emoji.remove();
+            }, 3000);
+        }
+
+        // Create ripple effect on click
+        function createRipple(e, element) {
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.width = ripple.style.height = '0';
+            
+            element.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+    </script>
 
 </body>
 </html>

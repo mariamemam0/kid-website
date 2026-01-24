@@ -45,7 +45,7 @@ return back()->with('message','Verification email sent!');
 Route::resource('kids',KidController::class);
 
 Route::get('/courses',[CourseController::class,'index']);
-Route::get('/reactions', function () {
-    return view('reaction');
-});
+
+
+Route::view('/reactions', 'reaction');
 Route::post('/reactions',[ReactionController::class,'store']);
